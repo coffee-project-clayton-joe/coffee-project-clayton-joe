@@ -2,7 +2,7 @@
 
 function renderCoffee(coffee) {
     let html = '<div class="d-flex me-5">';
-    html += '<h2 class="me-2">' + coffee.name + '</h2>';
+    html += '<h2 class="me-2 text-capitalize">' + coffee.name + '</h2>';
     html += '<p class="text-secondary">' + coffee.roast + '</p>';
     html += '</div>';
 
@@ -35,6 +35,19 @@ const coffees = [{id: 1, name: 'Light City', roast: 'light', display: true},
     {id: 13, name: 'Italian', roast: 'dark', display: true},
     {id: 14, name: 'French', roast: 'dark', display: true},
 ];
+
+document.querySelector('#submit-add')
+    .addEventListener('click', (event) => {
+        event.preventDefault();
+        let newCoffee = {
+            id: coffees.length+1,
+            name: document.querySelector('#coffee-name-2').value.toLowerCase(),
+            roast: document.querySelector("#roast-add").value,
+            display: true
+        };
+        coffees.push(newCoffee);
+        main_content.innerHTML = renderCoffees(coffees);
+    });
 
 let main_content = document.querySelector('#coffees');
 let roastSelection = document.querySelector('#roast-selection');
