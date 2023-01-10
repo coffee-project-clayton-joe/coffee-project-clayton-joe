@@ -11,7 +11,7 @@ function renderCoffee(coffee) {
 
 function renderCoffees(coffees) {
     let html = '';
-    for(let i = 0; i < coffees.length-1; i++) {
+    for(let i = 0; i < coffees.length; i++) {
         if(coffees[i].display === true) {
             html += renderCoffee(coffees[i]);
         }
@@ -41,7 +41,7 @@ document.querySelector('#submit-add')
         event.preventDefault();
         let newCoffee = {
             id: coffees.length+1,
-            name: document.querySelector('#coffee-name-2').value.toLowerCase(),
+            name: document.querySelector('#coffee-name-2').value.trim().toLowerCase(),
             roast: document.querySelector("#roast-add").value,
             display: true
         };
