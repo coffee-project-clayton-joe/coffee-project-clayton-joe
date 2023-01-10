@@ -10,6 +10,7 @@ function renderCoffee(coffee) {
 }
 
 function renderCoffees(coffees) {
+    coffees.sort((a, b) => (a.id > b.id) ? 1 : -1);
     let html = '';
     for(let i = 0; i < coffees.length; i++) {
         if(coffees[i].display === true) {
