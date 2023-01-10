@@ -11,7 +11,7 @@ function renderCoffee(coffee) {
 
 function renderCoffees(coffees) {
     let html = '';
-    for(let i = coffees.length - 1; i >= 0; i--) {
+    for(let i = 0; i < coffees.length-1; i++) {
         if(coffees[i].display === true) {
             html += renderCoffee(coffees[i]);
         }
