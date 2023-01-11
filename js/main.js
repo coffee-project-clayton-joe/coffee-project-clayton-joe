@@ -1,9 +1,12 @@
 "use strict"
 
 function renderCoffee(coffee) {
-    let html = '<div class="d-flex me-5">';
-    html += '<h2 class="me-2 text-capitalize">' + coffee.name + '</h2>';
-    html += '<p class="text-secondary">' + coffee.roast + '</p>';
+    let html = '<div style="height: 60px" class="coffee-block d-flex p-2 me-5 w-100">';
+    html += '<div class="d-flex flex-fill">'
+    html += '<h2 class="p-0 pe-2 m-0 text-capitalize">' + coffee.name + '</h2>';
+    html += '<p class="p-0 m-0 text-secondary">' + coffee.roast + '</p>';
+    html += '</div>';
+    html += '<div id="remove-btn" class="align-items-center"><button style="width: 20px; height: 20px" type="button" class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center">x</button></div>'
     html += '</div>';
 
     return html;
