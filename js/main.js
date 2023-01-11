@@ -1,9 +1,12 @@
 "use strict"
 
 function renderCoffee(coffee) {
-    let html = '<div class="d-flex me-5">';
-    html += '<h2 class="me-2 text-capitalize">' + coffee.name + '</h2>';
-    html += '<p class="text-secondary">' + coffee.roast + '</p>';
+    let html = '<div style="height: 60px" class="coffee-block d-flex p-2 me-5 w-100">';
+    html += '<div class="d-flex flex-fill">'
+    html += '<h2 class="p-0 pe-2 m-0 text-capitalize">' + coffee.name + '</h2>';
+    html += '<p class="p-0 m-0 text-secondary">' + coffee.roast + '</p>';
+    html += '</div>';
+    html += '<div id="remove-btn-div" class="align-items-center"><button id="remove-btn" style="width: 20px; height: 20px" type="button" class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center">x</button></div>'
     html += '</div>';
 
     return html;
@@ -21,22 +24,26 @@ function renderCoffees(coffees) {
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
-const coffees = JSON.parse(localStorage.getItem('coffees')) ||
+let coffees = getCoffees();
+
+function getCoffees() {
+    return JSON.parse(localStorage.getItem('coffees')) ||
     [{id: 1, name: 'Light City', roast: 'light', display: true},
-    {id: 2, name: 'Half City', roast: 'light', display: true},
-    {id: 3, name: 'Cinnamon', roast: 'light', display: true},
-    {id: 4, name: 'City', roast: 'medium', display: true},
-    {id: 5, name: 'American', roast: 'medium', display: true},
-    {id: 6, name: 'Breakfast', roast: 'medium', display: true},
-    {id: 7, name: 'High', roast: 'dark', display: true},
-    {id: 8, name: 'Continental', roast: 'dark', display: true},
-    {id: 9, name: 'New Orleans', roast: 'dark', display: true},
-    {id: 10, name: 'European', roast: 'dark', display: true},
-    {id: 11, name: 'Espresso', roast: 'dark', display: true},
-    {id: 12, name: 'Viennese', roast: 'dark', display: true},
-    {id: 13, name: 'Italian', roast: 'dark', display: true},
-    {id: 14, name: 'French', roast: 'dark', display: true},
-];
+        {id: 2, name: 'Half City', roast: 'light', display: true},
+        {id: 3, name: 'Cinnamon', roast: 'light', display: true},
+        {id: 4, name: 'City', roast: 'medium', display: true},
+        {id: 5, name: 'American', roast: 'medium', display: true},
+        {id: 6, name: 'Breakfast', roast: 'medium', display: true},
+        {id: 7, name: 'High', roast: 'dark', display: true},
+        {id: 8, name: 'Continental', roast: 'dark', display: true},
+        {id: 9, name: 'New Orleans', roast: 'dark', display: true},
+        {id: 10, name: 'European', roast: 'dark', display: true},
+        {id: 11, name: 'Espresso', roast: 'dark', display: true},
+        {id: 12, name: 'Viennese', roast: 'dark', display: true},
+        {id: 13, name: 'Italian', roast: 'dark', display: true},
+        {id: 14, name: 'French', roast: 'dark', display: true},
+    ];
+}
 
 document.querySelector('#submit-add')
     .addEventListener('click', (event) => {
@@ -74,3 +81,9 @@ document.querySelector("#coffee-name")
         main_content.innerHTML = renderCoffees(coffees);
     });
 
+document.querySelector("#restore-btn")
+    .addEventListener("click", () => {
+        localStorage.removeItem("coffees");
+        coffees = getCoffees();
+        main_content.innerHTML = renderCoffees(coffees);
+    });

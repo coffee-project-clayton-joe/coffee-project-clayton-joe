@@ -28,3 +28,12 @@ label {
 .jc-align-bottom {
     vertical-align: bottom !important;
 }
+
+.coffee-block #remove-btn-div {
+    display: none;
+    margin: auto;
+
+}
+.coffee-block:hover #remove-btn-div {
+    display: inline;
+}
