@@ -64,7 +64,7 @@ document.querySelector("#roast-selection")
     });
 
 document.querySelector("#coffee-name")
-    .addEventListener("change", () => {
+    .addEventListener("keyup", () => {
         let coffeeName = document.querySelector('#coffee-name').value;
         coffees.forEach((coffee) => {
             coffee.display = coffee.name.toLowerCase().includes(coffeeName.toLowerCase());
