@@ -21,7 +21,8 @@ function renderCoffees(coffees) {
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
-const coffees = [{id: 1, name: 'Light City', roast: 'light', display: true},
+const coffees = JSON.parse(localStorage.getItem('coffees')) ||
+    [{id: 1, name: 'Light City', roast: 'light', display: true},
     {id: 2, name: 'Half City', roast: 'light', display: true},
     {id: 3, name: 'Cinnamon', roast: 'light', display: true},
     {id: 4, name: 'City', roast: 'medium', display: true},
@@ -47,6 +48,7 @@ document.querySelector('#submit-add')
             display: true
         };
         coffees.push(newCoffee);
+        localStorage.setItem("coffees", JSON.stringify(coffees));
         main_content.innerHTML = renderCoffees(coffees);
     });
 
