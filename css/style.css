@@ -29,11 +29,11 @@ label {
     vertical-align: bottom !important;
 }
 
-.coffee-block #remove-btn {
+.coffee-block #remove-btn-div {
     display: none;
     margin: auto;
 
 }
-.coffee-block:hover #remove-btn {
+.coffee-block:hover #remove-btn-div {
     display: inline;
 }
