@@ -80,6 +80,14 @@ function add() {
 
         let count = coffees.filter(coffee => coffee.name === newCoffee.name && coffee.roast === newCoffee.roast).length;
 
+        if (COFFEE_ADD_NAME.value.trim().length === 0) {
+            document.getElementById("add-coffee-frm").classList.remove("needs-validation");
+            document.getElementById("add-coffee-frm").classList.add("was-validated");
+            document.getElementById("coffee-name-duplicate-alert").classList.add("d-none");
+            document.getElementById("coffee-name-missing-alert").classList.remove("d-none");
+            return;
+        }
+
         switch (count) {
             case 0:
                 // safe to add
@@ -97,10 +105,6 @@ function add() {
                 document.getElementById("coffee-name-missing-alert").classList.add("d-none");
                 break;
             default:
-                document.getElementById("add-coffee-frm").classList.remove("needs-validation");
-                document.getElementById("add-coffee-frm").classList.add("was-validated");
-                document.getElementById("coffee-name-duplicate-alert").classList.remove("d-none");
-                document.getElementById("coffee-name-missing-alert").classList.add("d-none");
         }
     };
 }
