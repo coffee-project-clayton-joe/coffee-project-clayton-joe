@@ -1,62 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Fancy Coffee</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Fancy Coffee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <h1 class="text-center">Fancy Coffee Company</h1>
 <hr>
 <div class="container m-3 w-100">
-<main>
-	<div id="coffees">
-	</div>
-</main>
-<aside class="ms-3">
-	<form>
-		<div class="form-group">
-		<label for="roast-selection" class="form-label">Roast</label>
-		<select id="roast-selection" class="form-select">
-			<option selected>all</option>
-			<option>light</option>
-			<option>medium</option>
-			<option>dark</option>
-		</select>
-		</div>
-		<div class="form-group">
-		<label for="coffee-name" class="form-label w-100">
-			Coffee Name
-			<input id="coffee-name" name="coffee-name" type="text" class="form-control">
-		</label>
-		</div>
-		<input id="submit-selection" type="submit" class="btn btn-primary w-100"/>
-	</form>
-	<hr>
-	<h1 class="text-center mt-3">Add a Coffee</h1>
-	<form>
-		<div class="form-group">
-		<label for="roast-add-selection" class="form-label">Roast</label>
-		<select name="roast-selection" id="roast-add-selection" class="form-select">
-			<option>light</option>
-			<option>medium</option>
-			<option>dark</option>
-		</select>
-		</div>
-		<div class="form-group">
-		<label for="coffee-name" class="form-label w-100">
-			Name
-			<input id="coffee-name-2" name="coffee-name" type="text" class="form-control">
-		</label>
-		</div>
-		<input id="submit-add" type="submit" class="btn btn-primary w-100"/>
-		<button id="restore-btn" class="btn btn-warning mt-2 w-100" type="button">Restore Default</button>
-	</form>
-</aside>
+    <main>
+        <div id="coffees">
+        </div>
+    </main>
+    <aside class="ms-3">
+        <form>
+            <div class="form-group">
+                <label for="roast-selection" class="form-label">Roast</label>
+                <select id="roast-selection" class="form-select">
+                    <option selected>all</option>
+                    <option>light</option>
+                    <option>medium</option>
+                    <option>dark</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="coffee-name" class="form-label w-100">
+                    Coffee Name
+                    <input id="coffee-name" name="coffee-name" type="text" class="form-control">
+                </label>
+            </div>
+            <input id="submit-selection" type="submit" class="btn btn-primary w-100"/>
+        </form>
+        <hr>
+        <h1 class="text-center mt-3">Add a Coffee</h1>
+        <form id="add-coffee-frm" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="roast-add-selection" class="form-label">Roast</label>
+                <select name="roast-selection" id="roast-add-selection" class="form-select">
+                    <option>light</option>
+                    <option>medium</option>
+                    <option>dark</option>
+                </select>
+            </div>
+            <div class="form-group position-relative">
+                <label for="coffee-name" class="form-label w-100">
+                    Name
+                    <input id="coffee-name-2" name="coffee-name" type="text" class="form-control" required>
+                </label>
+                <div id="coffee-name-missing-alert" class="d-none alert alert-danger">
+                    Missing! Please enter a valid coffee name.
+                </div>
+                <div id="coffee-name-duplicate-alert" class="d-none alert alert-danger">
+                    Duplicate! Please enter a valid coffee name.
+                </div>
+            </div>
+            <input id="submit-add" type="submit" class="btn btn-primary w-100"/>
+            <button id="restore-btn" class="btn btn-warning mt-2 w-100" type="button">Restore Default</button>
+        </form>
+    </aside>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

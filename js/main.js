@@ -61,6 +61,13 @@ function remove(event) {
     MAIN_CONTENT.innerHTML = renderCoffees(coffees);
 }
 
+function resetForm() {
+    document.getElementById("add-coffee-frm").classList.add("needs-validation");
+    document.getElementById("add-coffee-frm").classList.remove("was-validated");
+    document.getElementById("coffee-name-missing-alert").classList.add("d-none");
+    document.getElementById("coffee-name-duplicate-alert").classList.add("d-none");
+}
+
 function add() {
     return (event) => {
         event.preventDefault();
@@ -71,14 +78,29 @@ function add() {
             display: true
         };
 
-        //if filter returns 0 matches then this is a new coffee, therefore add it
-        if (coffees.filter(coffee => coffee.name === newCoffee.name && coffee.roast === newCoffee.roast).length === 0) {
-            // safe to add
-            coffees.push(newCoffee);
-            localStorage.setItem("coffees", JSON.stringify(coffees));
-            ROAST_ADD_SELECTION.value = 'light';
-            COFFEE_ADD_NAME.value = '';
-            MAIN_CONTENT.innerHTML = renderCoffees(coffees);
+        let count = coffees.filter(coffee => coffee.name === newCoffee.name && coffee.roast === newCoffee.roast).length;
+
+        switch (count) {
+            case 0:
+                // safe to add
+                coffees.push(newCoffee);
+                localStorage.setItem("coffees", JSON.stringify(coffees));
+                ROAST_ADD_SELECTION.value = 'light';
+                COFFEE_ADD_NAME.value = '';
+                MAIN_CONTENT.innerHTML = renderCoffees(coffees);
+                resetForm();
+                break
+            case 1:
+                document.getElementById("add-coffee-frm").classList.remove("needs-validation");
+                document.getElementById("add-coffee-frm").classList.add("was-validated");
+                document.getElementById("coffee-name-duplicate-alert").classList.remove("d-none");
+                document.getElementById("coffee-name-missing-alert").classList.add("d-none");
+                break;
+            default:
+                document.getElementById("add-coffee-frm").classList.remove("needs-validation");
+                document.getElementById("add-coffee-frm").classList.add("was-validated");
+                document.getElementById("coffee-name-duplicate-alert").classList.remove("d-none");
+                document.getElementById("coffee-name-missing-alert").classList.add("d-none");
         }
     };
 }
@@ -109,5 +131,6 @@ document.querySelector("#restore-btn")
     .addEventListener("click", () => {
         localStorage.removeItem("coffees");
         coffees = getCoffees();
+        resetForm();
         MAIN_CONTENT.innerHTML = renderCoffees(coffees);
     });
