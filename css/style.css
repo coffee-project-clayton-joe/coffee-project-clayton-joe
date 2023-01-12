@@ -32,8 +32,13 @@ label {
 .coffee-block .remove-btn-div {
     display: none;
     margin: auto;
-
 }
+
+.remove-btn {
+    height: 20px;
+    width: 20px;
+}
+
 .coffee-block:hover .remove-btn-div {
     display: inline;
 }
