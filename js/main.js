@@ -72,7 +72,8 @@ function add() {
         };
 
         //if filter returns 0 matches then this is a new coffee, therefore add it
-        if (coffees.filter(coffee => coffee.name === newCoffee.name && coffee.roast === newCoffee.roast).length === 0) {
+        if (coffees.filter(coffee => coffee.name === newCoffee.name && coffee.roast === newCoffee.roast).length === 0 &&
+                COFFEE_ADD_NAME.value.trim().length !== 0) {
             // safe to add
             coffees.push(newCoffee);
             localStorage.setItem("coffees", JSON.stringify(coffees));
