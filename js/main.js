@@ -6,7 +6,7 @@ function renderCoffee(coffee) {
     html += '<h2 class="p-0 pe-2 m-0 text-capitalize">' + coffee.name + '</h2>';
     html += '<p class="p-0 m-0 text-secondary">' + coffee.roast + '</p>';
     html += '</div>';
-    html += '<div id="remove-btn-div" class="align-items-center"><button id="remove-btn" style="width: 20px; height: 20px" type="button" class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center">x</button></div>'
+    html += '<div class="align-items-center remove-btn-div"><button style="width: 20px; height: 20px" type="button" db-name="' + coffee.name + '" db-roast="' + coffee.roast + '" class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center remove-btn" onclick="remove(event)" >x</button></div>'
     html += '</div>';
 
     return html;
@@ -45,6 +45,22 @@ function getCoffees() {
     ];
 }
 
+let main_content = document.querySelector('#coffees');
+let roastSelection = document.querySelector('#roast-selection');
+main_content.innerHTML = renderCoffees(coffees);
+
+function remove(event) {
+    let dbName = event.target.getAttribute("db-name");
+    let dbRoast = event.target.getAttribute("db-roast");
+    coffees.forEach((coffee) => {
+        if (coffee.name === dbName && coffee.roast === dbRoast) {
+            coffee.display = false;
+        }
+    })
+    localStorage.setItem("coffees", JSON.stringify(coffees));
+    main_content.innerHTML = renderCoffees(coffees);
+}
+
 document.querySelector('#submit-add')
     .addEventListener('click', (event) => {
         event.preventDefault();
@@ -59,9 +75,6 @@ document.querySelector('#submit-add')
         main_content.innerHTML = renderCoffees(coffees);
     });
 
-let main_content = document.querySelector('#coffees');
-let roastSelection = document.querySelector('#roast-selection');
-main_content.innerHTML = renderCoffees(coffees);
 
 document.querySelector("#roast-selection")
     .addEventListener("change", () => {
@@ -87,3 +100,4 @@ document.querySelector("#restore-btn")
         coffees = getCoffees();
         main_content.innerHTML = renderCoffees(coffees);
     });
+
