@@ -7,7 +7,7 @@ function renderCoffee(coffee) {
     html += '<p class="p-0 m-0 text-secondary">' + coffee.roast + '</p>';
     html += '</div>';
     html += '<div class="align-items-center remove-btn-div">'
-    html += '<button class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center remove-btn" onclick="remove(event)" db-id="' + coffee.id + '" type="button"><i class="fa-solid fa-xmark"></i></button>'
+    html += '<button class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center remove-btn" onclick="remove(event)" db-id="' + coffee.id + '" type="button">X</button>'
     html += '</div></div>';
 
     return html;
