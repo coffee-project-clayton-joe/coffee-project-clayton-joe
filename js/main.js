@@ -6,8 +6,9 @@ function renderCoffee(coffee) {
     html += '<h2 class="p-0 pe-2 m-0 text-capitalize">' + coffee.name + '</h2>';
     html += '<p class="p-0 m-0 text-secondary">' + coffee.roast + '</p>';
     html += '</div>';
-    html += '<div class="align-items-center remove-btn-div"><button style="width: 20px; height: 20px" type="button" db-name="' + coffee.name + '" db-roast="' + coffee.roast + '" class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center remove-btn" onclick="remove(event)" >x</button></div>'
-    html += '</div>';
+    html += '<div class="align-items-center remove-btn-div">'
+    html += '<button class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center remove-btn" onclick="remove(event)" db-id="' + coffee.id + '" type="button">x</button>'
+    html += '</div></div>';
 
     return html;
 }
@@ -45,59 +46,68 @@ function getCoffees() {
     ];
 }
 
-let main_content = document.querySelector('#coffees');
-let roastSelection = document.querySelector('#roast-selection');
-main_content.innerHTML = renderCoffees(coffees);
+const MAIN_CONTENT = document.querySelector('#coffees');
+const ROAST_SELECTION = document.querySelector('#roast-selection');
+const COFFEE_NAME = document.querySelector('#coffee-name');
+const ROAST_ADD_SELECTION = document.querySelector('#roast-add-selection');
+const COFFEE_ADD_NAME = document.querySelector('#coffee-name-2');
+
+MAIN_CONTENT.innerHTML = renderCoffees(coffees);
 
 function remove(event) {
-    let dbName = event.target.getAttribute("db-name");
-    let dbRoast = event.target.getAttribute("db-roast");
-    coffees.forEach((coffee) => {
-        if (coffee.name === dbName && coffee.roast === dbRoast) {
-            coffee.display = false;
-        }
-    })
+    let dbId = event.target.getAttribute('db-id');
+    coffees.splice(coffees.indexOf(coffees.find(coffee => coffee.id === parseInt(dbId))), 1)
     localStorage.setItem("coffees", JSON.stringify(coffees));
-    main_content.innerHTML = renderCoffees(coffees);
+    MAIN_CONTENT.innerHTML = renderCoffees(coffees);
 }
 
-document.querySelector('#submit-add')
-    .addEventListener('click', (event) => {
+function add() {
+    return (event) => {
         event.preventDefault();
         let newCoffee = {
-            id: coffees.length+1,
-            name: document.querySelector('#coffee-name-2').value.trim().toLowerCase(),
-            roast: document.querySelector("#roast-add").value,
+            id: coffees[coffees.length - 1].id + 1,
+            name: COFFEE_ADD_NAME.value.trim().toLowerCase(),
+            roast: ROAST_ADD_SELECTION.value,
             display: true
         };
-        coffees.push(newCoffee);
-        localStorage.setItem("coffees", JSON.stringify(coffees));
-        main_content.innerHTML = renderCoffees(coffees);
-    });
 
+        //if filter returns 0 matches then this is a new coffee, therefore add it
+        if (coffees.filter(coffee => coffee.name === newCoffee.name && coffee.roast === newCoffee.roast).length === 0) {
+            // safe to add
+            coffees.push(newCoffee);
+            localStorage.setItem("coffees", JSON.stringify(coffees));
+            ROAST_ADD_SELECTION.value = 'light';
+            COFFEE_ADD_NAME.value = '';
+            MAIN_CONTENT.innerHTML = renderCoffees(coffees);
+        }
+    };
+}
 
-document.querySelector("#roast-selection")
-    .addEventListener("change", () => {
-        roastSelection = document.querySelector('#roast-selection');
-        coffees.forEach((coffee) => {
-            coffee.display = coffee.roast === roastSelection.value || roastSelection.value === "all";
-        });
-        main_content.innerHTML = renderCoffees(coffees);
+ROAST_SELECTION.addEventListener("change", () => {
+    coffees.forEach((coffee) => {
+        coffee.display = COFFEE_NAME.value.length === 0 ?
+            ROAST_SELECTION.value === 'all' || coffee.roast === ROAST_SELECTION.value :
+            coffee.name.toLowerCase().includes(COFFEE_NAME.value.toLowerCase()) &&
+                (ROAST_SELECTION.value === 'all' || coffee.roast === ROAST_SELECTION.value);
     });
+    MAIN_CONTENT.innerHTML = renderCoffees(coffees);
+});
 
-document.querySelector("#coffee-name")
-    .addEventListener("keyup", () => {
-        let coffeeName = document.querySelector('#coffee-name').value;
-        coffees.forEach((coffee) => {
-            coffee.display = coffee.name.toLowerCase().includes(coffeeName.toLowerCase());
-        });
-        main_content.innerHTML = renderCoffees(coffees);
+COFFEE_NAME.addEventListener("keyup", () => {
+    coffees.forEach((coffee) => {
+        coffee.display =
+            coffee.name.toLowerCase().includes(COFFEE_NAME.value.toLowerCase()) &&
+                (ROAST_SELECTION.value === 'all' || coffee.roast === ROAST_SELECTION.value);
     });
+    MAIN_CONTENT.innerHTML = renderCoffees(coffees);
+});
+
+document.querySelector('#submit-add')
+    .addEventListener('click', add());
 
 document.querySelector("#restore-btn")
     .addEventListener("click", () => {
         localStorage.removeItem("coffees");
         coffees = getCoffees();
-        main_content.innerHTML = renderCoffees(coffees);
+        MAIN_CONTENT.innerHTML = renderCoffees(coffees);
     });
-
