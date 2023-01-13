@@ -1,3 +1,7 @@
+.navbar {
+    border-bottom: black solid 3px;
+}
+
 table {
     border-collapse: collapse;
     margin: 15px 0;
