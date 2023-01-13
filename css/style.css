@@ -9,7 +9,7 @@
 .coffee {
     color: white;
     padding: 5px;
-    margin: 10px;
+    margin: 10px 0;
     border: black solid 5px;
     display: flex;
     justify-content: space-between;

@@ -1,25 +1,40 @@
 "use strict"
 
+/*let html = '<div style="height: 60px" class="coffee-block d-flex p-2 me-5 w-100">';
+html += '<div class="d-flex flex-fill">'
+html += '<h2 class="p-0 pe-2 m-0 text-capitalize">' + coffee.name + '</h2>';
+html += '<p class="p-0 m-0 text-secondary">' + coffee.roast + '</p>';
+html += '</div>';
+html += '<div class="align-items-center remove-btn-div">'
+html += '<button class="btn btn-warning p-0 m-0 d-flex justify-content-center align-items-center remove-btn" onclick="remove(event)" db-id="' + coffee.id + '" type="button">X</button>'
+html += '</div></div>';*/
+
 function renderCoffee(coffee) {
     var html = '';
     if (coffee.roast === "light") {
         html = '<div class="coffee roast-light">';
+        html += '<div>'
         html += '<h2>' + coffee.name + '</h2>';
         html += '<p class="badge rounded-pill bg-dark">' + coffee.roast + '</p>';
+        html += '</div>';
         html += '<button type="button" class="btn remove-btn btn-danger">X</button>'
         html += '</div>';
     } else if (coffee.roast === "medium") {
-        html = '<div class="coffee roast-medium">';
+        html = '<div class="coffee roast-medium">'
+        html += '<div>';
         html += '<h2>' + coffee.name + '</h2>';
         html += '<p class="badge rounded-pill bg-dark">' + coffee.roast + '</p>';
+        html += '</div>';
         html += '<button type="button" class="btn remove-btn btn-danger">X</button>'
         html += '</div>';
     } else if (coffee.roast === "dark") {
         html = '<div class="coffee roast-dark">';
+        html += '<div>';
         html += '<h2>' + coffee.name + '</h2>';
         html += '<p class="badge rounded-pill bg-dark">' + coffee.roast + '</p>';
+        html += '</div><div>';
         html += '<button type="button" class="btn remove-btn btn-danger">X</button>'
-        html += '</div>';
+        html += '</div></div>';
     }
 
     return html;
