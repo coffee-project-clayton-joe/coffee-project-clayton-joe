@@ -1,10 +1,26 @@
 "use strict"
 
 function renderCoffee(coffee) {
-    var html = '<div class="coffee">';
-    html += '<h2>' + coffee.name + '</h2>';
-    html += '<p>' + coffee.roast + '</p>';
-    html += '</div>';
+    var html = '';
+    if (coffee.roast === "light") {
+        html = '<div class="coffee roast-light">';
+        html += '<h2>' + coffee.name + '</h2>';
+        html += '<p class="badge rounded-pill bg-dark">' + coffee.roast + '</p>';
+        html += '<button type="button" class="btn remove-btn btn-danger">X</button>'
+        html += '</div>';
+    } else if (coffee.roast === "medium") {
+        html = '<div class="coffee roast-medium">';
+        html += '<h2>' + coffee.name + '</h2>';
+        html += '<p class="badge rounded-pill bg-dark">' + coffee.roast + '</p>';
+        html += '<button type="button" class="btn remove-btn btn-danger">X</button>'
+        html += '</div>';
+    } else if (coffee.roast === "dark") {
+        html = '<div class="coffee roast-dark">';
+        html += '<h2>' + coffee.name + '</h2>';
+        html += '<p class="badge rounded-pill bg-dark">' + coffee.roast + '</p>';
+        html += '<button type="button" class="btn remove-btn btn-danger">X</button>'
+        html += '</div>';
+    }
 
     return html;
 }
@@ -48,7 +64,7 @@ var coffees = [
 ];
 
 const COFFEE_DISPLAY = document.querySelector('#coffees');
-var submitButton = document.querySelector('#submit');
+//var submitButton = document.querySelector('#submit');
 var roastSelection = document.querySelector('#roast-selection');
 
 COFFEE_DISPLAY.innerHTML = renderCoffees(coffees);

@@ -1,13 +1,47 @@
+#page {
+    background-color: #e3c5a9;
+}
+
 .navbar {
     border-bottom: black solid 3px;
 }
 
-table {
-    border-collapse: collapse;
-    margin: 15px 0;
+.coffee {
+    color: white;
+    padding: 5px;
+    margin: 10px;
+    border: black solid 5px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+.coffees-container {
+    border: #281111 solid 3px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.roast-light {
+    background-color: #b59787;
+}
+
+.roast-medium {
+    background-color: saddlebrown;
+}
+
+.roast-dark {
+    background-color: #281111;
+}
+
+.remove-btn {
+    display: none;
+    width: 30px;
+    height: 30px;
+    font-size: xx-small;
+}
+
+#coffees .remove-btn:hover {
+    display: inline-block;
 }
